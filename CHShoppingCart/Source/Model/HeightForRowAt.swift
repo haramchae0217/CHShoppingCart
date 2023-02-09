@@ -8,5 +8,5 @@
 import UIKit
 
 struct HeightForRowAt {
-    static let height: CGFloat = 140
+    static let height: CGFloat = 120
 }

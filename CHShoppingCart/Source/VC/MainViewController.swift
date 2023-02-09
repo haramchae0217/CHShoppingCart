@@ -21,7 +21,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableViewSet()
         searchBarSet()
     }
@@ -73,9 +72,9 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as? ShoppingItemTableViewCell else { return UITableViewCell() }
         let item = searchItemData[indexPath.row]
-        cell.itemNameLabel.text = item.title
-        cell.itemPriceLabel.text = "\(item.lprice)"
-        cell.itemManufactureLabel.text = item.maker
+        cell.itemNameLabel.text = "상품명 : \(item.title)"
+        cell.itemPriceLabel.text = "가격 : \(item.lprice)원"
+        cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
         cell.itemAppendButton.addTarget(self, action: #selector(appendItem), for: .touchUpInside)
         cell.itemAppendButton.tag = indexPath.row
         

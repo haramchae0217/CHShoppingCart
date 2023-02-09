@@ -39,7 +39,7 @@ class ShoppingBasketViewController: UIViewController {
     
     func calcLeftMoney() {
         let myBudget = 10000
-        var totalPrice: Int = 0
+        let totalPrice: Int = 0
         var leftMoney: Int = 0
         
 //        for price in MyDB.appendItem {
