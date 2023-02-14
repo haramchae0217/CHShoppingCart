@@ -86,19 +86,64 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-Kc-1lc">
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZK4-95-1cd">
+                                        <rect key="frame" x="70" y="250" width="274" height="220"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="잔금을 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7k-XI-8sO">
+                                                <rect key="frame" x="20" y="0.0" width="234" height="100"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1F3-2a-p2X">
+                                                <rect key="frame" x="20" y="120" width="234" height="100"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="확인"/>
+                                                <connections>
+                                                    <action selector="inputBudgetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RE0-8Y-PJd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="1F3-2a-p2X" firstAttribute="leading" secondItem="ZK4-95-1cd" secondAttribute="leading" constant="20" id="5wk-Oo-dgH"/>
+                                            <constraint firstItem="T7k-XI-8sO" firstAttribute="leading" secondItem="ZK4-95-1cd" secondAttribute="leading" constant="20" id="NsK-vk-IbS"/>
+                                            <constraint firstAttribute="trailing" secondItem="T7k-XI-8sO" secondAttribute="trailing" constant="20" id="T0X-ti-w13"/>
+                                            <constraint firstItem="T7k-XI-8sO" firstAttribute="top" secondItem="ZK4-95-1cd" secondAttribute="top" id="nMk-oM-WEA"/>
+                                            <constraint firstAttribute="bottom" secondItem="1F3-2a-p2X" secondAttribute="bottom" id="p4f-3g-DwY"/>
+                                            <constraint firstAttribute="trailing" secondItem="1F3-2a-p2X" secondAttribute="trailing" constant="20" id="qlQ-b0-7vZ"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ZK4-95-1cd" firstAttribute="top" secondItem="9wg-Kc-1lc" secondAttribute="top" constant="250" id="ZCf-Nh-nIg"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZK4-95-1cd" secondAttribute="bottom" constant="300" id="bn0-qi-Lfm"/>
+                                    <constraint firstItem="ZK4-95-1cd" firstAttribute="leading" secondItem="9wg-Kc-1lc" secondAttribute="leading" constant="70" id="hk8-2Z-Xjc"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZK4-95-1cd" secondAttribute="trailing" constant="70" id="iTB-F4-ZXx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lN4-KD-Bgx" secondAttribute="bottom" id="7II-pX-BKZ"/>
+                            <constraint firstItem="9wg-Kc-1lc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Pc1-GT-pJ3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9wg-Kc-1lc" secondAttribute="trailing" id="Sfh-mh-H57"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9wg-Kc-1lc" secondAttribute="bottom" id="XsP-t8-dLi"/>
                             <constraint firstItem="lN4-KD-Bgx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bqC-nc-7CR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lN4-KD-Bgx" secondAttribute="trailing" id="f0q-FA-zhe"/>
                             <constraint firstItem="lN4-KD-Bgx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="m1u-GC-HyJ"/>
+                            <constraint firstItem="9wg-Kc-1lc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qKw-CW-i0Z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WookPang" id="5pL-ZE-3wi">
                         <barButtonItem key="leftBarButtonItem" title="예산" id="ZCG-a0-jXI">
                             <color key="tintColor" red="0.2433659732" green="0.7364317775" blue="0.21197536589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="setMyBudgetButton:" destination="BYZ-38-t0r" id="M8H-Fj-TmW"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="장바구니" id="qdX-M6-vza">
                             <color key="tintColor" red="0.2433659732" green="0.7364317775" blue="0.21197536589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -109,6 +154,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ShoppingItemTableView" destination="lN4-KD-Bgx" id="2pV-ef-2bO"/>
+                        <outlet property="budgetSetView" destination="9wg-Kc-1lc" id="Ywm-dF-BZ0"/>
+                        <outlet property="inputBudgetTextField" destination="T7k-XI-8sO" id="NYG-g2-uoH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

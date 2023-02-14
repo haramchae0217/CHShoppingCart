@@ -10,6 +10,8 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var ShoppingItemTableView: UITableView!
+    @IBOutlet weak var budgetSetView: UIView!
+    @IBOutlet weak var inputBudgetTextField: UITextField!
     
     var searchItemData: [Item] = [] {
         didSet {
@@ -23,6 +25,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         tableViewSet()
         searchBarSet()
+        budgetSetView.isHidden = true
     }
     
     func tableViewSet() {
@@ -60,6 +63,18 @@ class MainViewController: UIViewController {
             UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
             print(MyDB.appendItem)
         }
+    }
+    
+    @IBAction func inputBudgetButton(_ sender: UIButton) {
+        let budget = inputBudgetTextField.text!
+        MyDB.myBudget = Int(budget)!
+        budgetSetView.isHidden = true
+        ShoppingItemTableView.isHidden = false
+    }
+    
+    @IBAction func setMyBudgetButton(_ sender: UIBarButtonItem) {
+        ShoppingItemTableView.isHidden = true
+        budgetSetView.isHidden = false
     }
 
     @IBAction func pushUIBarButton(_ sender: UIBarButtonItem) {
