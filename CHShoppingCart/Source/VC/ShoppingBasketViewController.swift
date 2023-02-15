@@ -39,12 +39,12 @@ class ShoppingBasketViewController: UIViewController {
     
     func calcLeftMoney() {
         let myBudget = MyDB.myBudget
-        let totalPrice: Int = 0
+        var totalPrice: Int = 0
         var leftMoney: Int = 0
         
-//        for price in MyDB.appendItem {
-//            totalPrice += price.lprice
-//        }
+        for price in MyDB.appendItem {
+            totalPrice += Int(price.lprice)!
+        }
         
         leftMoney = myBudget - totalPrice
         if leftMoney < 0 {

@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var budgetSetView: UIView!
     @IBOutlet weak var inputBudgetTextField: UITextField!
     
+    let searchItem = UISearchController(searchResultsController: nil)
     var searchItemData: [Item] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -34,7 +35,6 @@ class MainViewController: UIViewController {
     }
     
     func searchBarSet() {
-        let searchItem = UISearchController(searchResultsController: nil)
         searchItem.searchResultsUpdater = self
         searchItem.searchBar.delegate = self
         searchItem.searchBar.placeholder = "상품명을 검색하세요."
@@ -53,13 +53,24 @@ class MainViewController: UIViewController {
         }
     }
     
+    func alreadyAppendItem() {
+        for item in MyDB.appendItem {
+            for data in searchItemData {
+                if item.title == data.title && item.lprice == data.lprice && item.maker == data.maker && item.category1 == data.category1 {
+                    print("cart item : \(item)")
+                    print("search item : \(data)")
+                }
+            }
+        }
+    }
+    
     @objc func appendItem(_ sender: UIButton) {
         if !sender.isSelected {
             sender.isSelected = true
             let newData = searchItemData[sender.tag]
             MyDB.appendItem.append(newData)
-            sender.backgroundColor = .lightGray
-            sender.tintColor = .darkGray
+//            sender.backgroundColor = .lightGray
+//            sender.tintColor = .darkGray
             UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
             print(MyDB.appendItem)
         }
@@ -67,12 +78,18 @@ class MainViewController: UIViewController {
     
     @IBAction func inputBudgetButton(_ sender: UIButton) {
         let budget = inputBudgetTextField.text!
-        MyDB.myBudget = Int(budget)!
+        if budget.isEmpty {
+            MyDB.myBudget = 0
+        } else {
+            MyDB.myBudget = Int(budget)!
+        }
+        searchItem.searchBar.isHidden = false
         budgetSetView.isHidden = true
         ShoppingItemTableView.isHidden = false
     }
     
     @IBAction func setMyBudgetButton(_ sender: UIBarButtonItem) {
+        searchItem.searchBar.isHidden = true
         ShoppingItemTableView.isHidden = true
         budgetSetView.isHidden = false
     }
@@ -110,15 +127,15 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchItem = searchController.searchBar.text {
-            print("검색어 : ",searchItem)
-//            searchItemData = ItemData.ItemList.filter{ $0.itemName.map { String ($0) }.contains(searchItem) }
+            apiService(query: searchItem)
         }
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let itemTitle = searchBar.text!
-        apiService(query: itemTitle)
-    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        let searchItem = searchBar.text!
+//        apiService(query: searchItem)
+//        alreadyAppendItem()
+//    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchItemData = []

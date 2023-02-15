@@ -90,15 +90,17 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZK4-95-1cd">
-                                        <rect key="frame" x="70" y="250" width="274" height="220"/>
+                                        <rect key="frame" x="70" y="280" width="274" height="160"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="잔금을 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7k-XI-8sO">
-                                                <rect key="frame" x="20" y="0.0" width="234" height="100"/>
+                                                <rect key="frame" x="20" y="0.0" width="234" height="70"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1F3-2a-p2X">
-                                                <rect key="frame" x="20" y="120" width="234" height="100"/>
+                                                <rect key="frame" x="20" y="90" width="234" height="70"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="0.2433659732" green="0.7364317775" blue="0.21197536589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="확인"/>
                                                 <connections>
@@ -116,10 +118,10 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
-                                    <constraint firstItem="ZK4-95-1cd" firstAttribute="top" secondItem="9wg-Kc-1lc" secondAttribute="top" constant="250" id="ZCf-Nh-nIg"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZK4-95-1cd" secondAttribute="bottom" constant="300" id="bn0-qi-Lfm"/>
+                                    <constraint firstItem="ZK4-95-1cd" firstAttribute="top" secondItem="9wg-Kc-1lc" secondAttribute="top" constant="280" id="ZCf-Nh-nIg"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZK4-95-1cd" secondAttribute="bottom" constant="330" id="bn0-qi-Lfm"/>
                                     <constraint firstItem="ZK4-95-1cd" firstAttribute="leading" secondItem="9wg-Kc-1lc" secondAttribute="leading" constant="70" id="hk8-2Z-Xjc"/>
                                     <constraint firstAttribute="trailing" secondItem="ZK4-95-1cd" secondAttribute="trailing" constant="70" id="iTB-F4-ZXx"/>
                                 </constraints>
@@ -384,6 +386,9 @@
         </systemColor>
         <systemColor name="systemCyanColor">
             <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
