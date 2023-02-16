@@ -18,7 +18,6 @@ class MainViewController: UIViewController {
     var searchItemData: [Item] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.alreadyAppendItem()
                 self.ShoppingItemTableView.reloadData()
             }
         }
@@ -37,7 +36,6 @@ class MainViewController: UIViewController {
     }
     
     func searchBarSet() {
-        searchItem.searchResultsUpdater = self
         searchItem.searchBar.delegate = self
         searchItem.searchBar.placeholder = "상품명을 검색하세요."
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -49,6 +47,13 @@ class MainViewController: UIViewController {
             if code == 200 {
                 guard let item = item else { return }
                 self.searchItemData = item.items
+                self.alreadyAppendItem()
+                let sortList = self.alreadyAppendItemList.sorted(by: { $0 > $1 })
+                if !self.alreadyAppendItemList.isEmpty {
+                    for index in sortList {
+                        self.searchItemData.remove(at: index)
+                    }
+                }
             } else {
                 print("검색 실패",code)
             }
@@ -56,9 +61,9 @@ class MainViewController: UIViewController {
     }
     
     func alreadyAppendItem() {
+        alreadyAppendItemList = []
         for item in MyDB.appendItem {
             var count: Int = 0
-            alreadyAppendItemList = []
             for data in searchItemData {
                 count += 1
                 if item.title == data.title && item.lprice == data.lprice && item.maker == data.maker && item.category1 == data.category1 {
@@ -69,17 +74,11 @@ class MainViewController: UIViewController {
     }
     
     @objc func appendItem(_ sender: UIButton) {
-        if !sender.isSelected {
-            sender.isSelected = true
-            let newData = searchItemData[sender.tag]
-            MyDB.appendItem.append(newData)
-//            alreadyAppendItemList.append(sender.tag)
-            sender.backgroundColor = .lightGray
-            sender.tintColor = .darkGray
-            UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
-            print(MyDB.appendItem)
-            print(alreadyAppendItemList)
-        }
+        let newData = searchItemData[sender.tag]
+        MyDB.appendItem.append(newData)
+        sender.backgroundColor = .lightGray
+        sender.tintColor = .darkGray
+        UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
     }
     
     @IBAction func inputBudgetButton(_ sender: UIButton) {
@@ -132,11 +131,7 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
-extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
+extension MainViewController: UISearchBarDelegate, UISearchControllerDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchItem = searchBar.text {
             apiService(query: searchItem)
