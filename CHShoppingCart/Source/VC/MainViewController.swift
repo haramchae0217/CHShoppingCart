@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var inputBudgetTextField: UITextField!
     
     let searchItem = UISearchController(searchResultsController: nil)
+    var alreadyAppendItemList: [Int] = []
     var searchItemData: [Item] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -57,12 +58,11 @@ class MainViewController: UIViewController {
     func alreadyAppendItem() {
         for item in MyDB.appendItem {
             var count: Int = 0
+            alreadyAppendItemList = []
             for data in searchItemData {
                 count += 1
                 if item.title == data.title && item.lprice == data.lprice && item.maker == data.maker && item.category1 == data.category1 {
-                    print(count)
-                    print("cart item : \(item)")
-                    print("search item : \(data)")
+                    alreadyAppendItemList.append(count - 1)
                 }
             }
         }
@@ -73,10 +73,12 @@ class MainViewController: UIViewController {
             sender.isSelected = true
             let newData = searchItemData[sender.tag]
             MyDB.appendItem.append(newData)
+//            alreadyAppendItemList.append(sender.tag)
             sender.backgroundColor = .lightGray
             sender.tintColor = .darkGray
             UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
             print(MyDB.appendItem)
+            print(alreadyAppendItemList)
         }
     }
     
