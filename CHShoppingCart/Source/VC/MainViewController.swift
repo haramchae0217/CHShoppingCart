@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     var searchItemData: [Item] = [] {
         didSet {
             DispatchQueue.main.async {
+                self.alreadyAppendItem()
                 self.ShoppingItemTableView.reloadData()
             }
         }
@@ -55,8 +56,11 @@ class MainViewController: UIViewController {
     
     func alreadyAppendItem() {
         for item in MyDB.appendItem {
+            var count: Int = 0
             for data in searchItemData {
+                count += 1
                 if item.title == data.title && item.lprice == data.lprice && item.maker == data.maker && item.category1 == data.category1 {
+                    print(count)
                     print("cart item : \(item)")
                     print("search item : \(data)")
                 }
@@ -69,8 +73,8 @@ class MainViewController: UIViewController {
             sender.isSelected = true
             let newData = searchItemData[sender.tag]
             MyDB.appendItem.append(newData)
-//            sender.backgroundColor = .lightGray
-//            sender.tintColor = .darkGray
+            sender.backgroundColor = .lightGray
+            sender.tintColor = .darkGray
             UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
             print(MyDB.appendItem)
         }
@@ -103,12 +107,14 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as? ShoppingItemTableViewCell else { return UITableViewCell() }
-        let item = searchItemData[indexPath.row]
-        cell.itemNameLabel.text = "상품명 : \(item.title)"
-        cell.itemPriceLabel.text = "가격 : \(item.lprice)원"
-        cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
-        cell.itemAppendButton.addTarget(self, action: #selector(appendItem), for: .touchUpInside)
-        cell.itemAppendButton.tag = indexPath.row
+        if !searchItemData.isEmpty {
+            let item = searchItemData[indexPath.row]
+            cell.itemNameLabel.text = "상품명 : \(item.title)"
+            cell.itemPriceLabel.text = "가격 : \(item.lprice)원"
+            cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
+            cell.itemAppendButton.addTarget(self, action: #selector(appendItem), for: .touchUpInside)
+            cell.itemAppendButton.tag = indexPath.row
+        }
         
         return cell
     }
@@ -126,16 +132,14 @@ extension MainViewController: UITableViewDelegate {
 
 extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchItem = searchController.searchBar.text {
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchItem = searchBar.text {
             apiService(query: searchItem)
         }
     }
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        let searchItem = searchBar.text!
-//        apiService(query: searchItem)
-//        alreadyAppendItem()
-//    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchItemData = []

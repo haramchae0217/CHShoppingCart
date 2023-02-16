@@ -27,8 +27,8 @@ class ShoppingBasketViewController: UIViewController {
     }
     
     func basicImage() {
-        if !MyDB.appendItem.isEmpty {
-            emptyCartImageView.isHidden = true
+        if MyDB.appendItem.isEmpty {
+            emptyCartImageView.isHidden = false
         }
     }
     
@@ -60,17 +60,10 @@ class ShoppingBasketViewController: UIViewController {
     }
     
     @objc func removeItem(_ sender: UIButton) {
-        if !sender.isSelected {
-            sender.isSelected = true
-//            let removeData = MainViewController.searchItemData[sender.tag]
-//            MyDB.appendItem.removeAll { data in
-//                 == removeData && data.itemPrice == removeData.itemPrice && data.itemManufacture == removeData.itemManufacture
-//            }
-            basicImage()
-            basketItemTableView.reloadData()
-            calcLeftMoney()
-            print(MyDB.appendItem)
-        }
+        MyDB.appendItem.remove(at: sender.tag)
+        calcLeftMoney()
+        basicImage()
+        basketItemTableView.reloadData()
     }
 }
 
