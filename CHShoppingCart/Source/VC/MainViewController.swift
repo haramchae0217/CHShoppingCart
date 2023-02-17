@@ -75,10 +75,22 @@ class MainViewController: UIViewController {
     
     @objc func appendItem(_ sender: UIButton) {
         let newData = searchItemData[sender.tag]
+        let newCategory = searchItemData[sender.tag].category1
         MyDB.appendItem.append(newData)
+        MyDB.categoryList.insert(newCategory)
+        print(newCategory)
         sender.backgroundColor = .lightGray
         sender.tintColor = .darkGray
-        UIAlertController.showAlert(message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?", viewController: self)
+        
+        let alert = UIAlertController(title: "알림", message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?" , preferredStyle: .alert)
+        let shoppingMoreButton = UIAlertAction(title: "더 쇼핑하기", style: .cancel, handler: nil)
+        let shoppingStopButton = UIAlertAction(title: "장바구니로 가기", style: .default) { _ in
+            guard let BasketVC = self.storyboard?.instantiateViewController(withIdentifier: "BasketVC") as? ShoppingBasketViewController else { return }
+            self.navigationController?.pushViewController(BasketVC, animated: true)
+        }
+        alert.addAction(shoppingMoreButton)
+        alert.addAction(shoppingStopButton)
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func inputBudgetButton(_ sender: UIButton) {
