@@ -16,6 +16,8 @@ class ShoppingBasketViewController: UIViewController {
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var leftMoneyLabel: UILabel!
     
+    var category: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +26,13 @@ class ShoppingBasketViewController: UIViewController {
         tableViewSet()
         calcLeftMoney()
         basicImage()
+        appendCategory()
+    }
+    
+    func appendCategory() {
+        for str in MyDB.categoryList {
+            category.append(str)
+        }
     }
     
     func basicImage() {
@@ -68,17 +77,18 @@ class ShoppingBasketViewController: UIViewController {
 }
 
 extension ShoppingBasketViewController: UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return
-//    }
-//    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return itemType[section]
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return MyDB.categoryList.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return category[section]
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BasketItemTableViewCell.identifer, for: indexPath) as? BasketItemTableViewCell else { return UITableViewCell() }
         let item = MyDB.appendItem[indexPath.row]
+        
         cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
         cell.itemPriceLabel.text = "가격 : \(item.lprice)"
         cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
