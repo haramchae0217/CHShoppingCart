@@ -110,7 +110,7 @@ extension MainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as? ShoppingItemTableViewCell else { return UITableViewCell() }
         if !searchItemData.isEmpty {
             let item = searchItemData[indexPath.row]
-            cell.itemNameLabel.text = "상품명 : \(item.title)"
+            cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
             cell.itemPriceLabel.text = "가격 : \(item.lprice)원"
             cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
             cell.itemAppendButton.addTarget(self, action: #selector(appendItem), for: .touchUpInside)
@@ -140,5 +140,28 @@ extension MainViewController: UISearchBarDelegate, UISearchControllerDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchItemData = []
+    }
+}
+
+extension String {
+    // html 태그 제거 + html entity들 디코딩.
+    var htmlEscaped: String {
+        guard let encodedData = self.data(using: .utf8) else {
+            return self
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        do {
+            let attributed = try NSAttributedString(data: encodedData,
+                                                    options: options,
+                                                    documentAttributes: nil)
+            return attributed.string
+        } catch {
+            return self
+        }
     }
 }

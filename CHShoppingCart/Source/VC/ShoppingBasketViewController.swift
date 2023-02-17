@@ -79,7 +79,7 @@ extension ShoppingBasketViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BasketItemTableViewCell.identifer, for: indexPath) as? BasketItemTableViewCell else { return UITableViewCell() }
         let item = MyDB.appendItem[indexPath.row]
-        cell.itemNameLabel.text = "상품명 : \(item.title)"
+        cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
         cell.itemPriceLabel.text = "가격 : \(item.lprice)"
         cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
         cell.itemRemoveButton.addTarget(self, action: #selector(removeItem), for: .touchUpInside)
