@@ -18,7 +18,6 @@
 		835C9F37284BB7EB00BA249D /* HeightForRowAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C9F36284BB7EB00BA249D /* HeightForRowAt.swift */; };
 		835C9F3E284BBC0800BA249D /* BasketItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C9F3D284BBC0800BA249D /* BasketItemTableViewCell.swift */; };
 		835C9F40284BDC5300BA249D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C9F3F284BDC5300BA249D /* Item.swift */; };
-		835C9F45284BEDC900BA249D /* UIAlertController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C9F44284BEDC900BA249D /* UIAlertController++Extension.swift */; };
 		8397F8432857B83B006779E9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8397F8422857B83B006779E9 /* APIService.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +35,6 @@
 		835C9F36284BB7EB00BA249D /* HeightForRowAt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightForRowAt.swift; sourceTree = "<group>"; };
 		835C9F3D284BBC0800BA249D /* BasketItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasketItemTableViewCell.swift; path = CHShoppingCart/Source/Cell/BasketItemTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		835C9F3F284BDC5300BA249D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		835C9F44284BEDC900BA249D /* UIAlertController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController++Extension.swift"; sourceTree = "<group>"; };
 		8397F8422857B83B006779E9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,7 +78,6 @@
 		835C9F38284BB85900BA249D /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				835C9F43284BED9A00BA249D /* Extension */,
 				835C9F3A284BB86D00BA249D /* VC */,
 				835C9F3B284BB88100BA249D /* Cell */,
 				835C9F3C284BB89300BA249D /* Model */,
@@ -126,14 +123,6 @@
 				835C9F36284BB7EB00BA249D /* HeightForRowAt.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		835C9F43284BED9A00BA249D /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				835C9F44284BEDC900BA249D /* UIAlertController++Extension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,7 +200,6 @@
 				835C9F23284B89AE00BA249D /* MainViewController.swift in Sources */,
 				835C9F40284BDC5300BA249D /* Item.swift in Sources */,
 				835C9F35284BB23E00BA249D /* ShoppingItemTableViewCell.swift in Sources */,
-				835C9F45284BEDC900BA249D /* UIAlertController++Extension.swift in Sources */,
 				835C9F37284BB7EB00BA249D /* HeightForRowAt.swift in Sources */,
 				8397F8432857B83B006779E9 /* APIService.swift in Sources */,
 				835C9F1F284B89AE00BA249D /* AppDelegate.swift in Sources */,
