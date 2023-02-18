@@ -25,9 +25,16 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavigationController()
         tableViewSet()
         searchBarSet()
         budgetSetView.isHidden = true
+    }
+    
+    func configureNavigationController() {
+        title = "WookPang"
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "barItemColor")
     }
     
     func tableViewSet() {
