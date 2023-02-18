@@ -21,7 +21,7 @@ class ShoppingBasketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "장바구니"
+        title = "장바구니니"
         
         tableViewSet()
         calcLeftMoney()
