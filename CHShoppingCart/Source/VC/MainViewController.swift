@@ -85,7 +85,6 @@ class MainViewController: UIViewController {
         let newCategory = searchItemData[sender.tag].category1
         MyDB.appendItem.append(newData)
         MyDB.categoryList.insert(newCategory)
-        print(newCategory)
         sender.backgroundColor = .lightGray
         sender.tintColor = .darkGray
         
