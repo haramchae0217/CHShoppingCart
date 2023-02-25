@@ -153,27 +153,38 @@ extension ShoppingBasketViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BasketItemTableViewCell.identifer, for: indexPath) as? BasketItemTableViewCell else { return UITableViewCell() }
-    var item: Item = Item(title: "", lprice: "", maker: "", category1: "")
+        var item: Item = Item(title: "", lprice: "", maker: "", category1: "")
         for i in 0...category.count-1 {
-            switch category[i] {
-            case CategoryType.food.rawValue: item = foodItem[indexPath.row]
-            case CategoryType.life.rawValue: item = lifeHealthItem[indexPath.row]
-            case CategoryType.beauty.rawValue: item = beautyItem[indexPath.row]
-            case CategoryType.leisure.rawValue: item = leisureLifeItem[indexPath.row]
-            case CategoryType.parenting.rawValue: item = parentingItem[indexPath.row]
-            case CategoryType.accessories.rawValue: item = accessoriesItem[indexPath.row]
-            case CategoryType.digital.rawValue: item = digitalItem[indexPath.row]
-            case CategoryType.furniture.rawValue: item = furnitureItem[indexPath.row]
-            case CategoryType.clothes.rawValue: item = clothesItem[indexPath.row]
-            case CategoryType.sport.rawValue: item = sportItem[indexPath.row]
-            default: print("")
+            if indexPath.section == i {
+                switch category[i] {
+                case CategoryType.food.rawValue:
+                    item = foodItem[indexPath.row]
+                case CategoryType.life.rawValue:
+                    item = lifeHealthItem[indexPath.row]
+                case CategoryType.beauty.rawValue:
+                    item = beautyItem[indexPath.row]
+                case CategoryType.leisure.rawValue:
+                    item = leisureLifeItem[indexPath.row]
+                case CategoryType.parenting.rawValue:
+                    item = parentingItem[indexPath.row]
+                case CategoryType.accessories.rawValue:
+                    item = accessoriesItem[indexPath.row]
+                case CategoryType.digital.rawValue:
+                    item = digitalItem[indexPath.row]
+                case CategoryType.furniture.rawValue:
+                    item = furnitureItem[indexPath.row]
+                case CategoryType.clothes.rawValue:
+                    item = clothesItem[indexPath.row]
+                case CategoryType.sport.rawValue:
+                    item = sportItem[indexPath.row]
+                default: print("")
+                }
+                cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
+                cell.itemPriceLabel.text = "가격 : \(item.lprice)"
+                cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
+                cell.itemRemoveButton.addTarget(self, action: #selector(removeItem), for: .touchUpInside)
+                cell.itemRemoveButton.tag = indexPath.row
             }
-            print(item)
-            cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
-            cell.itemPriceLabel.text = "가격 : \(item.lprice)"
-            cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
-            cell.itemRemoveButton.addTarget(self, action: #selector(removeItem), for: .touchUpInside)
-            cell.itemRemoveButton.tag = indexPath.row
         }
     
         return cell
@@ -185,3 +196,35 @@ extension ShoppingBasketViewController: UITableViewDelegate {
         return HeightForRowAt.height
     }
 }
+
+/*
+ print(category[i])
+ switch category[i] {
+ case CategoryType.food.rawValue:
+     var item: Item = foodItem[indexPath.row]
+ case CategoryType.life.rawValue:
+     var item: Item = lifeHealthItem[indexPath.row]
+ case CategoryType.beauty.rawValue:
+     var item: Item = beautyItem[indexPath.row]
+ case CategoryType.leisure.rawValue:
+     var item: Item = leisureLifeItem[indexPath.row]
+ case CategoryType.parenting.rawValue:
+     var item: Item = parentingItem[indexPath.row]
+ case CategoryType.accessories.rawValue:
+     var item: Item = accessoriesItem[indexPath.row]
+ case CategoryType.digital.rawValue:
+     var item: Item = digitalItem[indexPath.row]
+ case CategoryType.furniture.rawValue:
+     var item: Item = furnitureItem[indexPath.row]
+ case CategoryType.clothes.rawValue:
+     var item: Item = clothesItem[indexPath.row]
+ case CategoryType.sport.rawValue:
+     var item: Item = sportItem[indexPath.row]
+ default: print("")
+ }
+ cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
+ cell.itemPriceLabel.text = "가격 : \(item.lprice)"
+ cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
+ cell.itemRemoveButton.addTarget(self, action: #selector(removeItem), for: .touchUpInside)
+ cell.itemRemoveButton.tag = indexPath.row
+ */
