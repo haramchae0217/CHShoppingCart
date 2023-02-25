@@ -127,8 +127,23 @@ class ShoppingBasketViewController: UIViewController {
     }
     
     @objc func removeItem(_ sender: UIButton) {
-        print(sender.tag)
-        MyDB.appendItem.remove(at: sender.tag)
+        /*
+         현재 진행상황
+         삭제 부분
+         카테고리 부분 + 넘어오는 mydb.compareItem에 다른거 들어있는 부분
+         */
+        let data: Item = MyDB.compareItem
+        var count = 0
+        for item in MyDB.appendItem {
+            count += 1
+            if item.title == data.title && item.lprice == data.lprice && item.category1 == data.category1 && item.maker == data.maker {
+                break
+            }
+        }
+        
+        MyDB.categoryList.remove(data.category1)
+        MyDB.appendItem.remove(at: count - 1)
+        MyDB.compareItem = Item(title: "", lprice: "", maker: "", category1: "")
         calcLeftMoney()
         basicImage()
         appendCategory()
@@ -183,13 +198,14 @@ extension ShoppingBasketViewController: UITableViewDataSource {
                 case CategoryType.furniture.rawValue: item = furnitureItem[indexPath.row]
                 case CategoryType.clothes.rawValue: item = clothesItem[indexPath.row]
                 case CategoryType.sport.rawValue: item = sportItem[indexPath.row]
-                default: print("")
+                default: item = Item(title: "", lprice: "", maker: "", category1: "")
                 }
                 cell.itemNameLabel.text = "상품명 : \(item.title.htmlEscaped)"
                 cell.itemPriceLabel.text = "가격 : \(item.lprice)"
                 cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
                 cell.itemRemoveButton.addTarget(self, action: #selector(removeItem), for: .touchUpInside)
                 cell.itemRemoveButton.tag = indexPath.row
+                MyDB.compareItem = item
             }
         }
     
