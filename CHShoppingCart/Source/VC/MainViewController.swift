@@ -88,9 +88,9 @@ class MainViewController: UIViewController {
         sender.backgroundColor = .lightGray
         sender.tintColor = .darkGray
         
-        let alert = UIAlertController(title: "알림", message: "장바구니에 담겼습니다. 더 쇼핑하시겠습니까?" , preferredStyle: .alert)
-        let shoppingMoreButton = UIAlertAction(title: "더 쇼핑하기", style: .cancel, handler: nil)
-        let shoppingStopButton = UIAlertAction(title: "장바구니로 가기", style: .default) { _ in
+        let alert = UIAlertController(title: "", message: "해당 상품을 장바구니에 담았습니다" , preferredStyle: .alert)
+        let shoppingMoreButton = UIAlertAction(title: "계속 쇼핑", style: .cancel, handler: nil)
+        let shoppingStopButton = UIAlertAction(title: "장바구니 보기", style: .default) { _ in
             guard let BasketVC = self.storyboard?.instantiateViewController(withIdentifier: "BasketVC") as? ShoppingBasketViewController else { return }
             self.navigationController?.pushViewController(BasketVC, animated: true)
         }
