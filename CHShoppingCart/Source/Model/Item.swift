@@ -22,4 +22,5 @@ struct MyDB {
     static var appendItem: [Item] = []
     static var myBudget: Int = 0
     static var categoryList: Set<String> = []
+    static var compareItem: Item = Item(title: "", lprice: "", maker: "", category1: "")
 }
