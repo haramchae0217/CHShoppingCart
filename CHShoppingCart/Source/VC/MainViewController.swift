@@ -81,6 +81,11 @@ class MainViewController: UIViewController {
     }
     
     @objc func appendItem(_ sender: UIButton) {
+        /*
+         진행 상황
+         버튼 회색 부분
+         */
+        
         let newData = searchItemData[sender.tag]
         let newCategory = searchItemData[sender.tag].category1
         MyDB.appendItem.append(newData)
