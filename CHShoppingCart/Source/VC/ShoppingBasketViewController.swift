@@ -81,8 +81,16 @@ class ShoppingBasketViewController: UIViewController {
         }
     }
     
+    func resetCategory() {
+        MyDB.categoryList.removeAll()
+    }
+    
     func appendCategory() {
         category = []
+        for data in MyDB.appendItem {
+            MyDB.categoryList.insert(data.category1)
+        }
+        
         for str in MyDB.categoryList {
             category.append(str)
         }
@@ -130,8 +138,9 @@ class ShoppingBasketViewController: UIViewController {
         /*
          현재 진행상황
          삭제 부분
-         카테고리 부분 + 넘어오는 mydb.compareItem에 다른거 들어있는 부분
+         넘어오는 mydb.compareItem에 다른거 들어있는 부분
          */
+        print(sender.tag)
         let data: Item = MyDB.compareItem
         var count = 0
         for item in MyDB.appendItem {
@@ -141,11 +150,11 @@ class ShoppingBasketViewController: UIViewController {
             }
         }
         
-        MyDB.categoryList.remove(data.category1)
         MyDB.appendItem.remove(at: count - 1)
         MyDB.compareItem = Item(title: "", lprice: "", maker: "", category1: "")
         calcLeftMoney()
         basicImage()
+        resetCategory()
         appendCategory()
         classificationOfCategory()
         basketItemTableView.reloadData()
@@ -185,6 +194,8 @@ extension ShoppingBasketViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BasketItemTableViewCell.identifer, for: indexPath) as? BasketItemTableViewCell else { return UITableViewCell() }
         var item: Item = Item(title: "", lprice: "", maker: "", category1: "")
+        var sectionNumber: Int = 0
+        var rowNumber: Int = 0
         for i in 0...category.count-1 {
             if indexPath.section == i {
                 switch category[i] {
@@ -204,8 +215,10 @@ extension ShoppingBasketViewController: UITableViewDataSource {
                 cell.itemPriceLabel.text = "가격 : \(item.lprice)"
                 cell.itemManufactureLabel.text = "제조사 : \(item.maker)"
                 cell.itemRemoveButton.addTarget(self, action: #selector(removeItem), for: .touchUpInside)
-                cell.itemRemoveButton.tag = indexPath.row
-                MyDB.compareItem = item
+                cell.itemRemoveButton.tag = indexPath.section
+                sectionNumber = indexPath.section
+                rowNumber = indexPath.row
+                
             }
         }
     
