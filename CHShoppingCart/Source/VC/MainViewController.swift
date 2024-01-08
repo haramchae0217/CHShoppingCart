@@ -14,8 +14,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var inputBudgetTextField: UITextField!
     
     let searchItem = UISearchController(searchResultsController: nil)
-    var alreadyAppendItemList: [Int] = []
-    var searchItemData: [Item] = [] {
+    var alreadyAppendItemList = [Int]()
+    var searchItemData = [Item]() {
         didSet {
             DispatchQueue.main.async {
                 self.ShoppingItemTableView.reloadData()

@@ -29,18 +29,18 @@ class ShoppingBasketViewController: UIViewController {
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var leftMoneyLabel: UILabel!
     
-    var category: [String] = []
+    var category = [String]()
 
-    var foodItem: [Item] = []
-    var lifeHealthItem: [Item] = []
-    var beautyItem: [Item] = []
-    var leisureLifeItem: [Item] = []
-    var parentingItem: [Item] = []
-    var accessoriesItem: [Item] = []
-    var digitalItem: [Item] = []
-    var furnitureItem: [Item] = []
-    var clothesItem: [Item] = []
-    var sportItem: [Item] = []
+    var foodItem = [Item]()
+    var lifeHealthItem = [Item]()
+    var beautyItem = [Item]()
+    var leisureLifeItem = [Item]()
+    var parentingItem = [Item]()
+    var accessoriesItem = [Item]()
+    var digitalItem = [Item]()
+    var furnitureItem = [Item]()
+    var clothesItem = [Item]()
+    var sportItem = [Item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +171,7 @@ extension ShoppingBasketViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        for i in 0...category.count-1 {
+        for i in 0..<category.count {
             if section == i {
                 switch category[i] {
                 case CategoryType.food.rawValue: return foodItem.count
@@ -196,7 +196,7 @@ extension ShoppingBasketViewController: UITableViewDataSource {
         var item: Item = Item(title: "", lprice: "", maker: "", category1: "")
         var sectionNumber: Int = 0
         var rowNumber: Int = 0
-        for i in 0...category.count-1 {
+        for i in 0..<category.count {
             if indexPath.section == i {
                 switch category[i] {
                 case CategoryType.food.rawValue: item = foodItem[indexPath.row]
